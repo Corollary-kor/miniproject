@@ -1,0 +1,79 @@
+```
+$ eksctl create iamserviceaccount `
+  --name ebs-csi-controller-sa `
+  --namespace kube-system `
+  --cluster test-eks-cluster `
+  --attach-policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy `
+  --approve `
+  --role-only `
+  --role-name AmazonEKS_EBS_CSI_DriverRole
+```
+
+(2) eksctl 애드온을 통한 설치
+* 명령어
+```
+$ eksctl create addon --name aws-ebs-csi-driver --cluster test-eks-cluster `
+    --service-account-role-arn arn:aws:iam::353738458094:role/AmazonEKS_EBS_CSI_DriverRole --force
+```
+
+(3) eksctl 애드온을 통한 설치 상태 확인
+* 명령어
+```
+$ eksctl get addon --name aws-ebs-csi-driver --cluster test-eks-cluster
+```
+
+(4) AWS EBS CSI Driver 설치 확인
+* 명령어
+```
+$ kubectl get pods -n kube-system | grep ebs-csi-controller
+```
+
+
+
+# AWS Load Balancer Controller 설치 방법
+
+(1) IAM Policy 생성
+* 명령어
+```
+$ aws iam create-policy `
+    --policy-name AWSLoadBalancerControllerIAMPolicy2 `
+    --policy-document file://iam_policy.json
+```
+
+(2) IAM Role 및 EKS내 서비스 어카운트 생성
+* 명령어
+```
+$ eksctl create iamserviceaccount `
+  --cluster=test-eks-cluster `
+  --namespace=kube-system `
+  --name=aws-load-balancer-controller2 `
+  --role-name "AmazonEKSLoadBalancerControllerRole2" `
+  --attach-policy-arn=arn:aws:iam::353738458094:policy/AWSLoadBalancerControllerIAMPolicy2 `
+  --override-existing-serviceaccounts `
+  --approve
+```
+
+(3) Helm Repository 등록 및 정보 업데이트
+* 명령어
+```
+$ helm repo add eks https://aws.github.io/eks-charts
+$ helm repo update
+$ helm repo list
+```
+
+(4) Helm Release 배포
+* 명령어
+```
+$ helm install aws-load-balancer-controller eks/aws-load-balancer-controller `
+  -n kube-system `
+  --set clusterName=test-eks-cluster `
+  --set serviceAccount.create=false `
+  --set serviceAccount.name=aws-load-balancer-controller2
+```
+
+(5) Helm Release 배포 확인 및 K8s 리소스 생성 확인
+* 명령어
+```
+$ helm list -n kube-system
+$ kubectl get deployment -n kube-system aws-load-balancer-controller
+```
