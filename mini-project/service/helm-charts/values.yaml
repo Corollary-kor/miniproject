@@ -51,10 +51,10 @@ ingress:
       alb.ingress.kubernetes.io/target-type: ip
       alb.ingress.kubernetes.io/subnets: subnet-03b9f62392cd48759, subnet-0553ab4988792e24b
   hosts:
-    - chart-example.local
-      # paths:
-      #   - path: /
-      #     pathType: Prefix
+    - host: ""
+      paths:
+        - path: /
+          pathType: Prefix
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:
