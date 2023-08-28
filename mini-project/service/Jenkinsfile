@@ -7,7 +7,7 @@ def directoryPath="mini-project/service"
 def githubEmail="ldshoo@naver.com"
 def githubKey="github-key"
 def githubSSHURL="git@github.com:Corollary-kor/miniproject.git"
-def imageTag="orange"
+def imageTag="red"
 
 podTemplate(yaml: '''
               apiVersion: v1
