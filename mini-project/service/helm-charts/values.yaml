@@ -49,7 +49,7 @@ ingress:
   annotations: 
       alb.ingress.kubernetes.io/scheme: internet-facing
       alb.ingress.kubernetes.io/target-type: ip
-      alb.ingress.kubernetes.io/subnets: subnet-03b9f62392cd48759, subnet-0553ab4988792e24b
+      alb.ingress.kubernetes.io/subnets: subnet-0e076ccc1cf8927a6, subnet-04c18a90161e9fe95
   hosts:
     - host: ""
       paths:

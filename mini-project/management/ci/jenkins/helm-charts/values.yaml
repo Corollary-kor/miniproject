@@ -245,6 +245,7 @@ controller:
   #   - workflow-aggregator:596.v8c21c963d92d
   #   - git:5.0.0
   #   - configuration-as-code:1625.v27444588cc3d
+  # installPlugins: false
   installPlugins:
     - configuration-as-code:latest
     - kubernetes:latest
@@ -470,7 +471,7 @@ controller:
       kubernetes.io/ingress.class: alb
       alb.ingress.kubernetes.io/scheme: internet-facing
       alb.ingress.kubernetes.io/target-type: ip
-      alb.ingress.kubernetes.io/subnets: subnet-03b9f62392cd48759, subnet-0553ab4988792e24b
+      alb.ingress.kubernetes.io/subnets: subnet-0e076ccc1cf8927a6, subnet-04c18a90161e9fe95
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
     # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
