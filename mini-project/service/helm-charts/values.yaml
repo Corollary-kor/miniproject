@@ -8,7 +8,7 @@ image:
   repository: 353738458094.dkr.ecr.ap-northeast-2.amazonaws.com/mini-project
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: blue
+  tag: orange
 
 container:
   port: 8080
